@@ -1,0 +1,363 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root, .app {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1001;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background: linear-gradient(45deg, #1c1c1c, #ff0000);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e50914;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-bar input {
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  width: 250px;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+  background: #e50914;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e50914;
+  cursor: pointer;
+}
+
+.live-viewers {
+  font-size: 14px;
+  background: #e50914;
+  padding: 5px 10px;
+  border-radius: 15px;
+  white-space: nowrap;
+}
+
+/* Option Bar */
+.option-bar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  background: #222;
+  padding: 15px 0;
+}
+
+.option-bar a {
+  text-decoration: none;
+  color: white;
+  padding: 8px 16px;
+  transition: background 0.3s;
+  border-radius: 5px;
+}
+
+.option-bar a:hover {
+  background: #e50914;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 10px; /* reduce horizontal padding for more content width */
+  margin-top: 120px;
+  margin-bottom: 80px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Video Grid: 5 boxes per row */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5rem;
+}
+
+/* Video Box */
+.video-box {
+  background: #1f1f1f;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.video-box:hover {
+  transform: translateY(-8px);
+}
+
+.video-box iframe {
+  width: 100%;
+  height: 160px;
+  border: none;
+  border-radius: 5px;
+}
+
+.video-info {
+  padding: 8px 5px;
+  text-align: center;
+  color: #ccc;
+}
+
+.video-info h4 {
+  color: #e50914;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  text-align: center;
+  padding: 20px 0;
+  background: #1f1f1f;
+  font-size: 14px;
+}
+
+.social-media a {
+  margin: 0 10px;
+  color: #e50914;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.social-media a:hover {
+  text-decoration: underline;
+}
+
+/* Hidden Menu */
+.hidden {
+  position: fixed;
+  right: -300px;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(135deg, #000000, #8B0000);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(39, 60, 117, 0.5);
+  transition: right 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 1000;
+  overflow-y: auto;
+  padding-top: 120px;
+}
+
+.hidden.active {
+  right: 0;
+  box-shadow: 0 0 40px rgba(102, 51, 153, 0.8), 0 0 60px rgba(39, 60, 117, 0.8);
+}
+
+.toggle-btn {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 18px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.toggle-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hidden.active .toggle-btn span:nth-child(1),
+.hidden.active .toggle-btn span:nth-child(3) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.hidden.active .toggle-btn span:nth-child(2) {
+  opacity: 0;
+}
+
+/* Sidebar List Styles */
+.hidden ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hidden ul li {
+  padding: 15px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.hidden ul li:last-child {
+  border-bottom: none;
+  margin-top: 20px;
+}
+
+.hidden ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.hidden ul li a:hover {
+  color: #ff0000;
+  transform: scale(1.1);
+}
+
+.hidden ul li a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #00cec9;
+  margin: 5px auto 0;
+  transition: width 0.3s ease;
+}
+
+.hidden ul li a:hover::after {
+  width: 80%;
+  box-shadow: 0 0 5px #00cec9, 0 0 10px #00cec9;
+}
+
+/* Search Bar Inside Sidebar */
+.hidden .search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.hidden .search-bar input {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.hidden .search-bar button {
+  width: 100%;
+  padding: 6px 10px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.main-content {
+  overflow-y: scroll; /* enable scrolling always */
+  
+  /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
+}
+
+.main-content::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+
+@media (max-width: 1024px) {
+  .video-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+ .live-viewers,.profile{
+    display: none;
+  }
+  .search-bar input {
+    width: 150px;
+  }
+  .option-bar{
+   
+    gap: 0.1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-bar input {
+    width: 120px;
+  }
+
+  .live-viewers,
+  .profile {
+    display: none;
+  }
+}
